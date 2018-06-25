@@ -21,14 +21,6 @@ esac
 
 PS3=">> "
 
-__my_rvm_ruby_version() {
-    local gemset=$(echo $GEM_HOME | awk -F'@' '{print $2}')
-  [ "$gemset" != "" ] && gemset="@$gemset"
-    local version=$(echo $MY_RUBY_HOME | awk -F'-' '{print $2}')
-    local full="$version$gemset"
-  [ "$full" != "" ] && echo "[$full]"
-}
-
 is_vim_shell() {
         if [ ! -z "$VIMRUNTIME" ]
         then
@@ -81,10 +73,10 @@ prompt() {
 
     # nice prompt
     case "`id -u`" in
-        0) PS1="${TITLEBAR}┌─$(my_ve)$(chroot)[$my_ps_root][$my_ps_host_root]$(modern_scm_prompt)$(__my_rvm_ruby_version)[${cyan}\w${normal}]$(is_vim_shell)
+        0) PS1="${TITLEBAR}┌─$(my_ve)$(chroot)[$my_ps_root][$my_ps_host_root]$(modern_scm_prompt)[${cyan}\w${normal}]$(is_vim_shell)
 └─▪ "
         ;;
-        *) PS1="${TITLEBAR}┌─$(my_ve)$(chroot)[$my_ps_user][$my_ps_host]$(modern_scm_prompt)$(__my_rvm_ruby_version)[${cyan}\w${normal}]$(is_vim_shell)
+        *) PS1="${TITLEBAR}┌─$(my_ve)$(chroot)[$my_ps_user][$my_ps_host]$(modern_scm_prompt)[${cyan}\w${normal}]$(is_vim_shell)
 └─▪ "
         ;;
     esac
